@@ -3,7 +3,7 @@ import path from "path";
 import dotenv from "dotenv";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
-import { performRedaction } from "./src/utils/sanitizer";
+import { performRedaction, DEFAULT_RULES } from "./src/utils/sanitizer";
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 const pdf = require("pdf-parse");
@@ -150,9 +150,10 @@ async function startServer() {
     addLog("gdpr", "Document ingestion secured. TLS/HTTPS verified.", "success");
 
     // 1. Run local PII Redaction Guardrail on the Proxy Server FIRST
-    addLog("guardrail", `Initializing Security Guardrails. Rules counted: ${rules?.length || 0}.`, "info");
+    const activeRules = (rules && rules.length > 0) ? rules : DEFAULT_RULES;
+    addLog("guardrail", `Initializing Security Guardrails. Rules counted: ${activeRules.length}.`, "info");
     const startTime = Date.now();
-    const sanitization = performRedaction(text, rules || [], customWords || []);
+    const sanitization = performRedaction(text, activeRules, customWords || []);
     const guardrailDuration = Date.now() - startTime;
 
     if (sanitization.entities.length > 0) {
