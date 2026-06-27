@@ -1,6 +1,6 @@
 import express from "express";
 import path from "path";
-import dotenv from "dotenv";
+import * as dotenv from "dotenv";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import { performRedaction, DEFAULT_RULES } from "./src/utils/sanitizer";
