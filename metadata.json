@@ -1,0 +1,6 @@
+{
+  "name": "Secure Proxy Document Sanitizer",
+  "description": "A secure document proxy that running local PII redaction guardrails to sanitize sensitive information before processing via the Gemini API, ensuring strict GDPR compliance and client-side safe re-hydration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
