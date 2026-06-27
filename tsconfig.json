@@ -20,6 +20,8 @@
         "./*"
       ]
     },
+    "baseUrl": ".",
+    "esModuleInterop": true,
     "allowImportingTsExtensions": true,
     "noEmit": true
   }
